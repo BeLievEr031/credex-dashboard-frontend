@@ -90,6 +90,34 @@ const TestimonialList: React.FC = () => {
             ),
         },
         {
+            title: "Designation",
+            dataIndex: "designation",
+            key: "designation",
+            width: 150,
+            render: (text: string) => (
+                <span
+                    className="text-gray-700 hover:text-blue-600 cursor-help"
+                    title={text}
+                >
+                    {text && text.length > 60 ? `${text.substring(0, 60)}...` : text}
+                </span>
+            ),
+        },
+        {
+            title: "Company",
+            dataIndex: "company",
+            key: "company",
+            width: 150,
+            render: (text: string) => (
+                <span
+                    className="text-gray-700 hover:text-blue-600 cursor-help"
+                    title={text}
+                >
+                    {text && text.length > 60 ? `${text.substring(0, 60)}...` : text}
+                </span>
+            ),
+        },
+        {
             title: "Created At",
             dataIndex: "createdAt",
             key: "createdAt",

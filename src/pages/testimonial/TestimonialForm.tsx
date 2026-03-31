@@ -12,6 +12,8 @@ const { TextArea } = Input;
 interface TestimonialFormData {
     feedback: string;
     image?: RcFile;
+    designation: string;
+    company: string;
 }
 
 const TestimonialForm: React.FC = () => {
@@ -33,6 +35,8 @@ const TestimonialForm: React.FC = () => {
                     const testimonial = response.data.data;
                     form.setFieldsValue({
                         feedback: testimonial.feedback,
+                        designation: testimonial.designation,
+                        company: testimonial.company
                     });
                     setPreviewImage(testimonial.imageUrl);
                 } catch (error) {
@@ -61,7 +65,9 @@ const TestimonialForm: React.FC = () => {
         try {
             const formData = {
                 feedback: values.feedback,
-                image: ""
+                image: "",
+                designation: values.designation,
+                company: values.company
             }
             console.log(formData)
             if (fileList.length > 0) {
@@ -118,6 +124,35 @@ const TestimonialForm: React.FC = () => {
                 className="space-y-1"
             >
                 <Form.Item
+                    label="Name"
+                    name="company"
+                    rules={[
+                        { required: true, message: "Please enter company" },
+                        { min: 2, message: "Company must be at least 2 characters" },
+                    ]}
+                >
+                    <Input
+                        placeholder="Enter company"
+                        className="rounded-lg"
+                    />
+                </Form.Item>
+
+                <Form.Item
+                    label="Designation"
+                    name="designation"
+                    rules={[
+                        { required: true, message: "Please enter designation" },
+                        { min: 2, message: "Designation must be at least 2 characters" },
+                    ]}
+                >
+                    <Input
+                        placeholder="Enter designation"
+                        className="rounded-lg"
+                    />
+                </Form.Item>
+
+
+                <Form.Item
                     label="Feedback"
                     name="feedback"
                     rules={[
@@ -131,6 +166,8 @@ const TestimonialForm: React.FC = () => {
                         className="rounded-lg"
                     />
                 </Form.Item>
+
+
 
                 <Form.Item
                     label="Image"
