@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table, Button, Space, Modal, message, Typography, Card, Image, Spin } from "antd";
+import { Table, Button, Space, Modal, message, Typography, Card, Image, Spin, Tag, Tabs } from "antd";
 import { PlusOutlined, EditOutlined, DeleteOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { testimonialApi } from "../../api/api";
@@ -14,17 +14,20 @@ interface Testimonial {
     publicId: string;
     createdAt: string;
     updatedAt: string;
+    type: string;
 }
 
 const TestimonialList: React.FC = () => {
     const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
     const [loading, setLoading] = useState(true);
+    const [activeTab, setActiveTab] = useState("all");
     const navigate = useNavigate();
 
-    const fetchTestimonials = async () => {
+    const fetchTestimonials = async (type?: string) => {
         setLoading(true);
         try {
-            const response = await testimonialApi.getTestimonials();
+            const params = type && type !== "all" ? { type } : {};
+            const response = await testimonialApi.getTestimonials(params);
             setTestimonials(response.data.data || []);
         } catch (error) {
             console.error("Failed to fetch testimonials", error);
@@ -118,6 +121,17 @@ const TestimonialList: React.FC = () => {
             ),
         },
         {
+            title: "Type",
+            dataIndex: "type",
+            key: "type",
+            width: 120,
+            render: (type: string) => (
+                <Tag color={type === "SELLER" ? "blue" : "purple"}>
+                    {type}
+                </Tag>
+            ),
+        },
+        {
             title: "Created At",
             dataIndex: "createdAt",
             key: "createdAt",
@@ -181,6 +195,20 @@ const TestimonialList: React.FC = () => {
                     Create Testimonial
                 </Button>
             </div>
+
+            <Tabs
+                activeKey={activeTab}
+                onChange={(key) => {
+                    setActiveTab(key);
+                    fetchTestimonials(key);
+                }}
+                items={[
+                    { key: "all", label: "All Testimonials" },
+                    { key: "SELLER", label: "Seller Testimonials" },
+                    { key: "BUYER", label: "Buyer Testimonials" },
+                ]}
+                className="mb-4"
+            />
 
             {loading ? (
                 <div className="h-64 flex items-center justify-center">

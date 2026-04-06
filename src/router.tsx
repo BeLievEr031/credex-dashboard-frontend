@@ -16,6 +16,7 @@ import ProductList from "./pages/products/ProductList";
 import ProductForm from "./pages/products/ProductForm";
 import TestimonialList from "./pages/testimonial/TestimonialList";
 import TestimonialForm from "./pages/testimonial/TestimonialForm";
+import NewsletterList from "./pages/newsletter/NewsletterList";
 import ProfilePage from "./pages/profile/ProfilePage";
 
 const router = createBrowserRouter([
@@ -66,6 +67,10 @@ const router = createBrowserRouter([
             {
                 path: "testimonials/edit/:id",
                 element: <TestimonialForm />,
+            },
+            {
+                path: "newsletter",
+                element: <NewsletterList />,
             },
             {
                 path: "profile",

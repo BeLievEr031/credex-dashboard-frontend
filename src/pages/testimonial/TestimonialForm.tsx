@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from "react";
-import { Form, Input, Button, Card, message, Spin, Typography, Upload } from "antd";
+import { Form, Input, Button, Card, message, Spin, Typography, Upload, Select } from "antd";
 import { SaveOutlined, ArrowLeftOutlined, UploadOutlined } from "@ant-design/icons";
 import { useNavigate, useParams } from "react-router-dom";
 import { testimonialApi } from "../../api/api";
@@ -14,6 +14,7 @@ interface TestimonialFormData {
     image?: RcFile;
     designation: string;
     company: string;
+    type: string;
 }
 
 const TestimonialForm: React.FC = () => {
@@ -36,7 +37,8 @@ const TestimonialForm: React.FC = () => {
                     form.setFieldsValue({
                         feedback: testimonial.feedback,
                         designation: testimonial.designation,
-                        company: testimonial.company
+                        company: testimonial.company,
+                        type: testimonial.type
                     });
                     setPreviewImage(testimonial.imageUrl);
                 } catch (error) {
@@ -67,7 +69,8 @@ const TestimonialForm: React.FC = () => {
                 feedback: values.feedback,
                 image: "",
                 designation: values.designation,
-                company: values.company
+                company: values.company,
+                type: values.type
             }
             console.log(formData)
             if (fileList.length > 0) {
@@ -149,6 +152,19 @@ const TestimonialForm: React.FC = () => {
                         placeholder="Enter designation"
                         className="rounded-lg"
                     />
+                </Form.Item>
+
+                <Form.Item
+                    label="Type"
+                    name="type"
+                    rules={[
+                        { required: true, message: "Please select type" }
+                    ]}
+                >
+                    <Select placeholder="Select type" className="rounded-lg">
+                        <Select.Option value="SELLER">SELLER</Select.Option>
+                        <Select.Option value="BUYER">BUYER</Select.Option>
+                    </Select>
                 </Form.Item>
 
 

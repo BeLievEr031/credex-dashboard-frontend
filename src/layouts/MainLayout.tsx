@@ -9,6 +9,7 @@ import {
     UserOutlined,
     LogoutOutlined,
     MessageOutlined,
+    MailOutlined,
 } from "@ant-design/icons";
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
@@ -45,6 +46,11 @@ const MainLayout: React.FC = () => {
             key: "/testimonials",
             icon: <MessageOutlined />,
             label: "Testimonials",
+        },
+        {
+            key: "/newsletter",
+            icon: <MailOutlined />,
+            label: "Newsletter",
         },
         {
             key: "/profile",

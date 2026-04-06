@@ -32,7 +32,7 @@ export const blogApi = {
 
 // --- Testimonial APIs ---
 export const testimonialApi = {
-    getTestimonials: () => axiosInstance.get("/testimonial"),
+    getTestimonials: (params?: { type?: string }) => axiosInstance.get("/testimonial", { params }),
     getTestimonial: (id: string) => axiosInstance.get(`/testimonial/${id}`),
     createTestimonial: (data: any) => axiosInstance.post("/testimonial/create", data,),
     updateTestimonial: (id: string, data: any) => axiosInstance.put(`/testimonial/${id}`, data,),
@@ -42,4 +42,10 @@ export const testimonialApi = {
 // --- Dashboard APIs ---
 export const dashboardApi = {
     getStats: () => axiosInstance.get("/dashboard/stats"),
+};
+
+// --- Newsletter APIs ---
+export const newsletterApi = {
+    getSubscribers: (params?: { page?: number; limit?: number; active?: boolean }) =>
+        axiosInstance.get("/newsletter/subscribers", { params }),
 };
