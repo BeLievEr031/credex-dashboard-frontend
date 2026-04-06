@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:3000/api";
+const API_BASE_URL = "https://credex-dashboard-backend.onrender.com/api";
 
 const axiosInstance = axios.create({
-    baseURL: "http://localhost:3000/api",
+    baseURL: "https://credex-dashboard-backend.onrender.com/api",
     withCredentials: true,
     headers: {
         "Content-Type": "application/json",
