@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table, Button, Space, message, Typography, Card, Tag, Spin } from "antd";
+import { Table, Button, Space, message, Typography, Card, Tag } from "antd";
 import { DownloadOutlined, ReloadOutlined } from "@ant-design/icons";
 import { newsletterApi } from "../../api/api";
 
@@ -120,8 +120,8 @@ const NewsletterList: React.FC = () => {
                     <p className="text-gray-500 m-0">Manage and export your newsletter email list</p>
                 </div>
                 <Space>
-                    <Button 
-                        icon={<ReloadOutlined />} 
+                    <Button
+                        icon={<ReloadOutlined />}
                         onClick={() => fetchSubscribers(pagination.current, pagination.pageSize)}
                         disabled={loading}
                     >
